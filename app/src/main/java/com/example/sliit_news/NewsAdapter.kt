@@ -4,7 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.example.sliit_news.MainActivityData
+import com.example.sliit_news.R
 import com.example.sliit_news.database.News
 import com.example.sliit_news.database.NewsRepository
 import kotlinx.coroutines.CoroutineScope

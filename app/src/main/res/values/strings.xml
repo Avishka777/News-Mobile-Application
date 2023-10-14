@@ -2,7 +2,7 @@
     <string name="app_name">SLIIT-NEWS</string>
     <string name="tvTitle">SLIIT NEWS</string>
     <string name="btnAdd">ADD NEWS</string>
-    <string name="alertTitle">Enter News Item</string>
+    <string name="alertTitle">Enter News</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="colors">

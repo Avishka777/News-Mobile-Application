@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             loadSettings()
         }
 
+
         val recyclerView: RecyclerView = findViewById(R.id.rvNewsList)
         val repository = NewsRepository(NewsDatabase.getInstance(this))
 
@@ -77,14 +78,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadSettings(){
+    private fun loadSettings() {
         val fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
-        if (fragment == null){
-
-            supportFragmentManager.beginTransaction().add(R.id.fragmentContainer,settingsFragment).commit()
-        }else{
-
-            supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer,settingsFragment).commit()
+        if (fragment == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragmentContainer, settingsFragment)
+                .commit()
+        } else {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, settingsFragment)
+                .commit()
         }
     }
 
@@ -93,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
 
         builder.setTitle(getText(R.string.alertTitle))
-        builder.setMessage("Enter the News Item Below:")
+        builder.setMessage("Enter News Below:")
 
         val input = EditText(this)
         input.inputType = InputType.TYPE_CLASS_TEXT
