@@ -8,18 +8,18 @@
         android:id="@+id/etItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Item" />
+        android:hint="News Title" />
 
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description" />
+        android:hint="News Description" />
 
     <EditText
         android:id="@+id/etDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Date" />
+        android:hint="Publish Date" />
 
 </LinearLayout>
