@@ -18,8 +18,8 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var adapter:NewsAdapter
-    private lateinit var viewModel:MainActivityData
+    private lateinit var adapter: NewsAdapter
+    private lateinit var viewModel: MainActivityData
 
     private val homeFragment = HomeFragment()
     private val settingsFragment = SettingsFragment()
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button:Button = findViewById(R.id.button)
+        val button: Button = findViewById(R.id.button)
         val button2: Button = findViewById(R.id.button2)
 
         button.setOnClickListener {
@@ -38,14 +38,13 @@ class MainActivity : AppCompatActivity() {
             loadSettings()
         }
 
-
         val recyclerView: RecyclerView = findViewById(R.id.rvNewsList)
         val repository = NewsRepository(NewsDatabase.getInstance(this))
 
         viewModel = ViewModelProvider(this)[MainActivityData::class.java]
 
-        viewModel.data.observe(this){
-            adapter = NewsAdapter(it,repository,viewModel)
+        viewModel.data.observe(this) {
+            adapter = NewsAdapter(it, repository, viewModel)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(this)
         }
@@ -53,77 +52,68 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val data = repository.getAllNewsItems()
 
-            runOnUiThread{
+            runOnUiThread {
                 viewModel.setData(data)
             }
         }
 
         val addItem: Button = findViewById(R.id.btnAddItem)
 
-        addItem.setOnClickListener{
+        addItem.setOnClickListener {
             displayAlert(repository)
         }
-
-
     }
 
-    private fun loadHome(){
+    private fun loadHome() {
         val fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
-        if (fragment == null){
-
-            supportFragmentManager.beginTransaction().add(R.id.fragmentContainer,homeFragment).commit()
-        }else{
-
-            supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer,homeFragment).commit()
+        if (fragment == null) {
+            supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, homeFragment).commit()
+        } else {
+            supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, homeFragment).commit()
         }
     }
 
     private fun loadSettings() {
         val fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
         if (fragment == null) {
-            supportFragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, settingsFragment)
-                .commit()
+            supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, settingsFragment).commit()
         } else {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, settingsFragment)
-                .commit()
+            supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, settingsFragment).commit()
         }
     }
 
-
-    private fun displayAlert(repository: NewsRepository){
+    private fun displayAlert(repository: NewsRepository) {
         val builder = AlertDialog.Builder(this)
-
         builder.setTitle(getText(R.string.alertTitle))
         builder.setMessage("Enter News Below:")
 
-        val input = EditText(this)
-        input.inputType = InputType.TYPE_CLASS_TEXT
-        builder.setView(input)
+        val formLayout = layoutInflater.inflate(R.layout.form_layout, null)
+        val etItem = formLayout.findViewById<EditText>(R.id.etItem)
+        val etDescription = formLayout.findViewById<EditText>(R.id.etDescription)
+        val etDate = formLayout.findViewById<EditText>(R.id.etDate)
 
-        // Set the positive button action
+        builder.setView(formLayout)
+
         builder.setPositiveButton("OK") { dialog, which ->
-        // Get the input text and display a Toast message
-            val item = input.text.toString()
+            val item = etItem.text.toString()
+            val description = etDescription.text.toString()
+            val date = etDate.text.toString()
+
             CoroutineScope(Dispatchers.IO).launch {
-                repository.insert(News(item))
+                repository.insert(News(item, description, date))
                 val data = repository.getAllNewsItems()
-                runOnUiThread{
+                runOnUiThread {
                     viewModel.setData(data)
                 }
             }
         }
 
-        // Set the negative button action
         builder.setNegativeButton("Cancel") { dialog, which ->
             dialog.cancel()
         }
 
-        // Create and show the alert dialog
         val alertDialog = builder.create()
         alertDialog.show()
-
     }
 
 }

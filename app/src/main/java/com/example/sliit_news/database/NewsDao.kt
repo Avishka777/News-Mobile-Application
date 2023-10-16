@@ -15,8 +15,9 @@ interface NewsDao {
     suspend fun delete(news:News)
 
     @Query("SELECT * FROM News")
-    fun getAllNewsItems():List<News>
+    fun getAllNewsItems(): List<News>
 
     @Query("SELECT * FROM News WHERE id=:id")
-    fun getOne(id:Int):News
+    fun getOne(id: Int): News
+
 }

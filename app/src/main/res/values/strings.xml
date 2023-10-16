@@ -4,6 +4,7 @@
     <string name="btnAdd">ADD NEWS</string>
     <string name="alertTitle">Enter News</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="MAD_NEWS_APP">MAD NEWS APP</string>
 
     <string-array name="colors">
         <item>Blank</item>

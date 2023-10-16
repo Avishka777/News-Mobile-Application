@@ -5,9 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class News(
-    var item:String?
-
-){
+    var item: String?,
+    var description: String?, // Add description field
+    var date: String? // Add date field
+) {
     @PrimaryKey(autoGenerate = true)
-    var id:Int?=null
+    var id: Int? = null
 }

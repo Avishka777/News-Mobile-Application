@@ -6,26 +6,26 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import java.security.AccessControlContext
 
-@Database(entities = [News::class], version = 1)
-abstract class NewsDatabase:RoomDatabase() {
+@Database(entities = [News::class], version = 2) // Change the version to 2
+abstract class NewsDatabase : RoomDatabase() {
 
-    abstract fun getNewsDao():NewsDao
+    abstract fun getNewsDao(): NewsDao
 
-    companion object{
+    companion object {
         @Volatile
-        private var INSTANCE:NewsDatabase? = null
+        private var INSTANCE: NewsDatabase? = null
 
-        fun getInstance(context: Context):NewsDatabase{
-            synchronized(this){
-                return INSTANCE?: Room.databaseBuilder(
+        fun getInstance(context: Context): NewsDatabase {
+            synchronized(this) {
+                return INSTANCE ?: Room.databaseBuilder(
                     context,
                     NewsDatabase::class.java,
                     "news_db"
-                ).build().also{
-                    INSTANCE = it
-                }
+                ).fallbackToDestructiveMigration() // Add this line for database migration
+                    .build().also {
+                        INSTANCE = it
+                    }
             }
         }
     }
-
 }
