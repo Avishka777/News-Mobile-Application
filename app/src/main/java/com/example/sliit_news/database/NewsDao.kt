@@ -17,7 +17,5 @@ interface NewsDao {
     @Query("SELECT * FROM News")
     fun getAllNewsItems(): List<News>
 
-    @Query("SELECT * FROM News WHERE id=:id")
-    fun getOne(id: Int): News
 
 }

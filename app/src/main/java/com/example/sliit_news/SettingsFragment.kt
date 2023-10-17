@@ -28,7 +28,8 @@ class SettingsFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-    //Changed Section
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

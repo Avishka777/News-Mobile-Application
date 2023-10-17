@@ -23,6 +23,7 @@ class NewsAdapter(items: List<News>, repository: NewsRepository, viewModel: Main
     private val viewModel = viewModel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
+        // Create the view holder
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_item, parent, false)
         context = parent.context
         return NewsViewHolder(view)
@@ -44,6 +45,7 @@ class NewsAdapter(items: List<News>, repository: NewsRepository, viewModel: Main
             val isChecked = holder.cbNews.isChecked
 
             if (isChecked) {
+                // Delete the item from the repository
                 CoroutineScope(Dispatchers.IO).launch {
                     repository.delete(currentItem)
                     val data = repository.getAllNewsItems()

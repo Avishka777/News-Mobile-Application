@@ -11,6 +11,6 @@ class NewsViewHolder(view: View) : ViewHolder(view) {
 
     val cbNews: CheckBox = view.findViewById(R.id.cbNews)
     val ivDelete: ImageView = view.findViewById(R.id.ivDelete)
-    val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView) // Add this line
-    val dateTextView: TextView = view.findViewById(R.id.dateTextView) // Add this line
+    val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
+    val dateTextView: TextView = view.findViewById(R.id.dateTextView)
 }

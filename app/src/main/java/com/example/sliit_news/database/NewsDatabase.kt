@@ -15,13 +15,14 @@ abstract class NewsDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: NewsDatabase? = null
 
+        // Get an instance of the database, creating it if it doesn't exist
         fun getInstance(context: Context): NewsDatabase {
             synchronized(this) {
                 return INSTANCE ?: Room.databaseBuilder(
                     context,
                     NewsDatabase::class.java,
                     "news_db"
-                ).fallbackToDestructiveMigration() // Add this line for database migration
+                ).fallbackToDestructiveMigration() //This line for database migration
                     .build().also {
                         INSTANCE = it
                     }

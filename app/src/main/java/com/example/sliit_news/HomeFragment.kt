@@ -27,11 +27,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-    //Changed Sections
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View?
+    {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_home,container,false)
 
@@ -44,6 +45,7 @@ class HomeFragment : Fragment() {
         val viewModel = ViewModelProvider(requireActivity())[FragmentViewModel::class.java]
 
         viewModel.getBackgroundColor().observe(requireActivity()){
+            // Set the background resource of the rootView based on the LiveData
             rootView.setBackgroundResource(it)
         }
 
